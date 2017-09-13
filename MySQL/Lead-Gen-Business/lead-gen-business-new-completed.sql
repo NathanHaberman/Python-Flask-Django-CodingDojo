@@ -35,7 +35,7 @@
 -- group by clients.client_id
 
 #7
--- select clients.first_name, clients.last_name,month(leads.registered_datetime) as 'month', count(leads.leads_id) as 'leads_count_per_month'
+-- select clients.first_name, clients.last_name, month(leads.registered_datetime) as 'month', count(leads.leads_id) as 'leads_count_per_month'
 -- from clients
 -- join sites on clients.client_id = sites.client_id
 -- join leads on sites.site_id = leads.leads_id
