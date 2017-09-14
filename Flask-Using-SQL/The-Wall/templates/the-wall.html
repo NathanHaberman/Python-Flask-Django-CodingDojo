@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>The Wall</title>
+    </head>
+    <body>
+        <!-- Showing user logged in -->
+        <p><b>Welcome {{ first_name[0]['first_name'] }}</b></p>
+        <form action="/log_off" method="POST">
+            <input type="submit" value="Log off">
+        </form><br>
+
+        <!-- Form for messages -->
+        <form action="/post" method="POST">
+            <textarea name="message" cols="50" rows="5">Enter your message</textarea>
+            <input type="submit" value="Post Message">
+        </form><br>
+
+        <h1><u>The Wall</u></h1>
+        <!-- Showing all messages in the database -->
+        {% if messages %}
+            {% for message in messages %}
+                <p><b>{{ message['first_name'] }} {{ message['last_name'] }} - {{ message['created_at'] }}</b></p>
+                <p style="margin-left:32px">{{ message['message'] }}</p>
+
+                <!-- Showing comments to each message -->
+                {% for comment in comments %}
+                    {% if comment['id'] == message['id'] %}
+                        <p style="margin-left:64px"><b>{{ comment['first_name'] }} {{ comment['last_name'] }} - {{ comment['created_at'] }}</b></p>
+                        <p style="margin-left:64px">{{ comment['comment'] }}</p>
+                    {% endif %}
+                {% endfor %}
+
+                <!-- Form for comments per message -->
+                <form action="/comment/{{ message['id'] }}" method="POST" style="margin-left:64px">
+                    <textarea name="comment" cols="30" rows="3">Enter your comment</textarea>
+                    <input type="submit">
+                </form>
+            {% endfor %}
+        {% endif %}
+    </body>
+</html>
