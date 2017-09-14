@@ -19,12 +19,16 @@ def success():
 
 @app.route('/submit', methods=['POST'])
 def submit():
-    email = request.form['email']
-    if email < 1:
-        flash("Please enter an email")
-        return redirect('/')
-    elif not EMAIL_REGEX.match(email):
+    data = {
+        'email' : request.form['email']
+    }
+    query = "select email from emails where email = :email"
+
+    if not EMAIL_REGEX.match(data['email']):
         flash("Please enter a valid email")
+        return redirect('/')
+    elif mysql.query_db(query,data):
+        flash("Email already taken")
         return redirect('/')
     else:
         flash(request.form['email'] + " was a valid email! Thank you!" )
