@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Word Game</title>
+    </head>
+    <body>
+        <h2>Random Word Game</h2>
+        <p>Attempt #{{request.session.count}}</p>
+        <p><b>{{request.session.word_generated}}</b></p>
+        <form action="/random_word/generate/" method="post">
+            {% csrf_token %}
+            <input type="submit" value="Generate">
+        </form>
+        <form action="/random_word/reset/" method="post">
+            {% csrf_token %}
+            <input type="submit" value="Reset">
+        </form>
+    </body>
+</html>
