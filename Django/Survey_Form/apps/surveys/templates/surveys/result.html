@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+    </head>
+    <body>
+        <h2>You have submitted the form {{ request.session.count }} times</h2>
+        <p>Name: {{ request.session.name }}</p>
+        <p>Email: {{ request.session.email }}</p>
+        <p>Comments:</p>
+        <p>{{ request.session.comments }}</p>
+    </body>
+</html>
