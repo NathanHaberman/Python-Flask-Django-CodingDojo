@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+        <title>Ninja Gold</title>
+    </head>
+    <body>
+        <div class="container p-4">
+            <div class="row justify-content-between">
+                <div class="col-4 p-3">
+                    <h3 class="d-inline">Gold:</h3>
+                    <h4 class="d-inline bg-warning px-3 rounded">{{request.session.gold}}</h4>
+                </div>
+                <div class="col-3 text-right">
+                    <form action="/reset" method="POST" class="form-group">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-outline-danger">Reset</button>
+                    </form>
+                </div>
+            </div>
+
+            
+            <div class="row justify-content-between">
+                <div class="col-3 text-center border border-warning rounded p-3">
+                    <h3>Farm</h3>
+                    <p>Earns 10-20 gold</p>
+                    <form action="/gold" method="POST" class="form-group">
+                        {% csrf_token %}
+                        <input type="hidden" name="building" value="farm">
+                        <button type="submit" class="btn btn-outline-warning">Get Gold!</button>
+                    </form>
+                </div>
+                
+                <div class="col-3 text-center border border-warning rounded p-3">
+                    <h3>Cave</h3>
+                    <p>Earns 5-10 gold</p>
+                    <form action="/gold" method="POST" class="form-group">
+                        {% csrf_token %}
+                        <input type="hidden" name="building" value="cave">
+                        <button type="submit" class="btn btn-outline-warning">Get Gold!</button>
+                    </form>
+                </div>
+                
+                <div class="col-3 text-center border border-warning rounded p-3">
+                    <h3>House</h3>
+                    <p>Earns 2-5 gold</p>
+                    <form action="/gold" method="POST" class="form-group">
+                        {% csrf_token %}
+                        <input type="hidden" name="building" value="house">
+                        <button type="submit" class="btn btn-outline-warning">Get Gold!</button>
+                    </form>
+                </div>
+                
+                <div class="col-3 text-center border border-warning rounded p-3">
+                    <h3>Casino</h3>
+                    <p>Earns/Loss 0-50 gold</p>
+                    <form action="/gold" method="POST" class="form-group">
+                        {% csrf_token %}
+                        <input type="hidden" name="building" value="casino">
+                        <button type="submit" class="btn btn-outline-warning">Get Gold!</button>
+                    </form>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <h5 class="my-3">Activity:</h5>
+            </div>
+            <div class="row border border-warning rounded p-4 d-block">
+                {% for activity in request.session.log %}
+                    <p>{{ activity }}</p>
+                {% endfor %}
+            </div>
+            
+        </div>
+    </body>
+</html>
