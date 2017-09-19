@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">        
+        <title>Courses</title>
+    </head>
+    <body>
+        <div class="container p-3">
+            <div class="row p-3">
+                <h2>Add Course</h2>
+            </div>
+            {% if messages %}
+                {% for message in messages %}
+                    <p class="text-danger">{{message}}</p>
+                {% endfor %}
+            {% endif %}
+            <div class="row justify-content-start">
+                <div class="col-4">
+                    <form action="/courses/add/" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="name">Course Name:</label>
+                            <input type="text" name="name" class="form-control" placeholder="Course Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="desc">Course Description:</label>
+                            <textarea name="desc" rows="4" class="form-control" placeholder="Description"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-outline-success">Add</button>
+                    </form>
+                </div>
+            </div>
+            <div class="row p-3 bg-secondary text-white rounded mt-3">
+                <div class="col-3">
+                    <h3>Course</h3>
+                </div>
+                <div class="col-3">
+                    <h3>Description</h3>
+                </div>
+                <div class="col-3">
+                    <h3>Date Added</h3>
+                </div>
+                <div class="col-3">
+                    <h3>Actions</h3>
+                </div>
+            </div>
+            {% for course in courses %}
+                <div class="row p-3 border-secondary border-top-0">
+                    <div class="col-3">
+                        <h5>{{course.name}}</h5>
+                    </div>
+                    <div class="col-3">
+                        <p>{{course.desc}}</p>
+                    </div>
+                    <div class="col-3">
+                        <p>{{course.created_at}}</p>
+                    </div>
+                    <div class="col-3">
+                        <a href="/courses/check/{{course.id}}"><button type="button" class="btn btn-outline-danger">Remove</button></a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </body>
+</html>
