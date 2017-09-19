@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+        <title>Users</title>
+    </head>
+    <body>
+        <div class="container p-3">
+            <div class="row justify-content-between">
+                <h1>Users</h1>
+                <a href="/users/new"><button type="button" class="btn btn-success">New User</button></a>
+            </div>
+            <div class="row bg-secondary text-white p-2 rounded">
+                <div class="col-1">
+                    <h3>id</h3>
+                </div>
+                <div class="col-4">
+                    <h3>Full Name</h3>
+                </div>
+                <div class="col-4">
+                    <h3>Email</h3>
+                </div>
+                <div class="col-3">
+                    <h3>Actions</h3>
+                </div>
+            </div>
+            {% for user in users %}
+            <div class="row p-2 border border-secondary border-top-0 rounded">
+                <div class="col-1">
+                    <h4>{{user.id}}</h4>
+                </div>
+                <div class="col-4">
+                    <h4>{{user.first_name}} {{user.last_name}}</h4>
+                </div>
+                <div class="col-4">
+                    <h4>{{user.email}}</h4>
+                </div>
+                <div class="col-3">
+                    <div class="row">
+                        <a href="/users/{{user.id}}"><button type="button" class="btn btn-outline-primary">Show</button></a>
+                        <a href="/users/{{user.id}}/edit"><button type="button" class="btn btn-outline-success ml-2">Edit</button></a>
+                        <form action="/users/{{user.id}}/destroy" method="POST" class="form-inline">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-outline-danger ml-2">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </body>
+</html>
